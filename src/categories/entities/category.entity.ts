@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Project } from './../../projects/entities/project.entity';
 
 @Entity('category')
 export class Category {
@@ -7,4 +8,7 @@ export class Category {
 
   @Column()
   name: string;
+
+  @OneToMany(() => Project, (project: Project) => project.category)
+  project: Project;
 }
