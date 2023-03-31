@@ -5,18 +5,20 @@ import { AppService } from './app.service';
 import { ProjectsModule } from './projects/projects.module';
 import { CategoriesModule } from './categories/categories.module';
 
+require('dotenv/config');
+
 @Module({
   imports: [
     ProjectsModule,
     CategoriesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: 'postgresql://postgres:oO5GI23TPelSplbcodTW@containers-us-west-142.railway.app:5862/railway',
-      host: 'containers-us-west-142.railway.app',
+      url: process.env.DATABASE_URL,
+      host: process.env.DATABASE_HOST,
       port: 5862,
-      username: 'postgres',
-      password: 'oO5GI23TPelSplbcodTW',
-      database: 'railway',
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
     }),
